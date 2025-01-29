@@ -26,14 +26,14 @@ def write_csv(filename, data, include_names=True):
 
 
 def replace(data, index, condition, new_value):
-    for key, values in data.items():
+    for values in data.values():
         if condition(values[index]):
             values[index] = new_value
 
 
 def main():
     names = read_names('names.txt')
-    raw_data = read_csv('export.csv')
+    raw_data = read_csv('canvas_grades.csv')
     columns = [6]  # 0 is the column AFTER the name column
     filtered_data = {name: [raw_data[name][i] for i in columns] for name in names}
 
@@ -43,7 +43,7 @@ def main():
     # replace(filtered_data, 1, lambda x: x == '0.75', '4')
     # replace(filtered_data, 1, lambda x: x == '1.00', '5')
 
-    write_csv('output.csv', filtered_data, include_names=False)
+    write_csv('processed_data.csv', filtered_data, include_names=True)
 
 
 if __name__ == '__main__':
